@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>Einzelfeld.qml</file>
         <file>Feld.qml</file>
+        <file>JSCode.js</file>
     </qresource>
 </RCC>
