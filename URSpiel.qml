@@ -10,20 +10,27 @@ Item {
     property variant posiblePos: Logic.leeresArray(8*3)
     property variant wegPlayer1: [3,2,1,0,8,9,10,11,12,13,14,15,7,6,5]
     property variant wegPlayer2:[19,18,17,16,8,9,10,11,12,13,14,15,23,22,21]
+    property variant felderFunktion: [2,1,1,1,0,0,2,1, 1,1,1,3,1,1,1,1 ,2,1,1,1,0,0,2,1]
+    property int keinFeld: 0
+    property int normalFeld: 1
+    property int doppeltZiehen: 2
+    property int burg: 3
+    property bool burgJump: false
     property int xFelder: 8
     property int yFelder: 3
     property int startstones: 8
+
     Player{
         id:player1
         playerColor: "maroon"
         playerId:1
-        way:[3,2,1,0,8,9,10,11,12,13,14,15,7,6,5]
+        way:wegPlayer1
     }
     Player{
         id:player2
         playerColor: "orange"
         playerId:2
-        way:[19,18,17,16,8,9,10,11,12,13,14,15,23,22,21]
+        way:wegPlayer2
     }
     Text {
         id: punktestand
@@ -43,6 +50,7 @@ Item {
         id:wuerfelPlayer1
         anchors.bottom: spielBrett.top
         anchors.left: spielBrett.left
+        stones: player1.notOnTheBoard
         enabled: if(playerAnDerReihe==player1.playerId){
                      return true
                  }
@@ -50,19 +58,10 @@ Item {
                      return false
                  }
     }
-    NotOnTheBoard{
-        anchors.left: wuerfelPlayer1.right
-        anchors.top: wuerfelPlayer1.top
-        stones:player1.notOnTheBoard
-    }
-    NotOnTheBoard{
-        anchors.left: wuerfelPlayer2.right
-        anchors.top: wuerfelPlayer2.top
-        stones:player2.notOnTheBoard
-    }
     Wuerfel{
         id:wuerfelPlayer2
         y:450
+        stones: player2.notOnTheBoard
         enabled:if(playerAnDerReihe==player2.playerId){
                              return true
                          }

@@ -3,7 +3,7 @@ import "JSCode.js" as Logic
 Rectangle {
     id:einzelFeld
     property int spielfeldLaenge: 100
-    property int feldFunktion: spielFeld.felderFunktion[feldID]
+    property int feldFunktion: felderFunktion[feldID]
     property int feldID: 0
     property int strassenBreite: spielfeldLaenge*0.15
     property real rand: 0.10
@@ -47,7 +47,7 @@ Rectangle {
             height: strassenBreite
             color: "saddlebrown"
             //visible:Logic.checkNeigbourLeft(wegPlayer1)//||Logic.checkNeigbourLeft(wegPlayer2)
-            visible: Logic.checkStreetLeft(wegPlayer1,wegPlayer2,einzelFeld.feldID)
+            visible: Logic.checkStreetLeft(player1.way,player2.way,einzelFeld.feldID)
         }
         Rectangle{
             x:(spielfeldLaenge/2)-(strassenBreite/2)-parent.x
@@ -56,7 +56,7 @@ Rectangle {
             height: strassenBreite
             color: "saddlebrown"
             //visible: false
-            visible:Logic.checkStreetRigth(wegPlayer1,wegPlayer2,einzelFeld.feldID)
+            visible:Logic.checkStreetRigth(player1.way,player2.way,einzelFeld.feldID)
 
         }
         Rectangle{
@@ -65,7 +65,7 @@ Rectangle {
             width: strassenBreite
             height: (spielfeldLaenge*0.5)+strassenBreite/2
             color: "saddlebrown"
-            visible:Logic.checkStreetUp(wegPlayer1,wegPlayer2,einzelFeld.feldID)
+            visible:Logic.checkStreetUp(player1.way,player2.way,einzelFeld.feldID)
         }
         Rectangle{
             x:(spielfeldLaenge/2)-(strassenBreite/2)-parent.x
@@ -73,15 +73,34 @@ Rectangle {
             width: strassenBreite
             height: (spielfeldLaenge*0.5)+strassenBreite/2
             color: "saddlebrown"
-            visible:Logic.checkStreetDown(wegPlayer1,wegPlayer2,einzelFeld.feldID)
+            visible:Logic.checkStreetDown(player1.way,player2.way,einzelFeld.feldID)
         }
+        Stone{
+            visible:if(playerPos[feldID]!=0){
+                        return true
+                    }
+                else{
+                        return false
+                    }
+            player:playerPos[feldID]
 
+        }
     }
 
     Text{
         text: einzelFeld.feldID
         anchors.centerIn: einzelFeld.Center
 
+    }
+
+
+    MouseArea{
+        anchors.fill:parent
+        onClicked: {
+            if(posiblePos[feldID]!=0){
+                Logic.platzieren(feldID)
+            }
+        }
     }
 
 

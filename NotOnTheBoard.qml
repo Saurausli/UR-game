@@ -1,11 +1,11 @@
 import QtQuick 2.0
 
-Rectangle{
+Item{
     property int stones: 0
     property int playerID: 0
     width: 300
     height: 100
-    color: "peru"
+
     property int durchmesser: 40
     Repeater{
         id:notOnTheBoard1

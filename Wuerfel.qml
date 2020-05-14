@@ -2,10 +2,15 @@ import QtQuick 2.0
 import "JSCode.js" as Logic
 
 Rectangle{
+    property int stones: 0
+    width: 800
+    height: 100
+    color: if(enabled) return "darkgoldenrod"
+            else "palegoldenrod"
+    Item{
+        id:wuerfelArea
     height: 100
     width: 500
-    color: "peru"
-    property int wurf: 0
 
     WuerfelEinzeln{
         id:wuerfel1
@@ -31,6 +36,7 @@ Rectangle{
         y:15
 
     }
+    }
     MouseArea{
         anchors.fill: parent
         onClicked: {
@@ -41,8 +47,11 @@ Rectangle{
             if(wurf==0){
                 Logic.naechsterZug()
             }
-
-            console.debug(ur.posiblePos)
         }
+    }
+    NotOnTheBoard{
+        anchors.left: wuerfelArea.right
+        anchors.top: wuerfelArea.top
+        stones:parent.stones
     }
 }
