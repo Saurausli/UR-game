@@ -1,11 +1,12 @@
 # Prerequisites
 *.d
-
+Release
 # Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
+*.user
 
 # Precompiled Headers
 *.gch

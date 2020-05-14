@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Einzelfeld.qml</file>
+        <file>Feld.qml</file>
+    </qresource>
+</RCC>
