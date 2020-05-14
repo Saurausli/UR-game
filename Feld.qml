@@ -3,12 +3,10 @@ import "JSCode.js" as Logic
 Rectangle {
     id:spielFeld
     property int feldLaenge: 100
-    property int xFelder: 8
-    property int yFelder: 3
+
     property variant spielfeldZustand: [8*3]
     property variant felderFunktion: [2,1,1,1,0,0,2,1, 1,1,1,3,1,1,1,1 ,2,1,1,1,0,0,2,1]
-    property variant wegPlayer1: [3,2,1,0,8,9,10,11,12,13,14,15,7,6,5]
-    property variant wegPlayer2:[19,18,17,16,8,9,10,11,12,13,14,15,23,22,21]
+
     property int keinFeld: 0
     property int normalFeld: 1
     property int doppeltZiehen: 2

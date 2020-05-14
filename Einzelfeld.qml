@@ -7,13 +7,17 @@ Rectangle {
     property int feldID: 0
     property int strassenBreite: spielfeldLaenge*0.15
     property real rand: 0.10
-    color: "beige"
+
+    color: if(posiblePos[feldID]==0){
+                return "beige"
+           }
+             else{
+                return "lime"
+            }
     height: spielfeldLaenge
     width: spielfeldLaenge
     x:0
     y:0
-
-
     Rectangle{
 
         x: einzelFeld.spielfeldLaenge*rand
