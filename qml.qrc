@@ -4,5 +4,8 @@
         <file>Einzelfeld.qml</file>
         <file>Feld.qml</file>
         <file>JSCode.js</file>
+        <file>URSpiel.qml</file>
+        <file>Wuerfel.qml</file>
+        <file>WuerfelEinzeln.qml</file>
     </qresource>
 </RCC>

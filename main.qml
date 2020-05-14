@@ -4,10 +4,10 @@ import "JSCode.js" as Logic
 
 Window {
     visible: true
-    width: 640
-    height: 480
+    width: 1000
+    height: 600
     title: qsTr("UR Schach")
-    Feld{
+    URSpiel{
 
     }
 }
