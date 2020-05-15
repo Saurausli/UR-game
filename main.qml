@@ -3,6 +3,7 @@ import QtQuick.Window 2.12
 import "JSCode.js" as Logic
 
 Window {
+    id:window
     visible: true
     width: 1000
     height: 600

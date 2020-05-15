@@ -18,7 +18,8 @@ Item {
     property bool burgJump: false
     property int xFelder: 8
     property int yFelder: 3
-    property int startstones: 8
+    property int startstones: 1
+    property bool finishWinner: false
 
     Player{
         id:player1
@@ -51,7 +52,7 @@ Item {
         anchors.bottom: spielBrett.top
         anchors.left: spielBrett.left
         stones: player1.notOnTheBoard
-        enabled: if(playerAnDerReihe==player1.playerId){
+        enabled: if(playerAnDerReihe==player1.playerId&&wurfBereit){
                      return true
                  }
                  else{
@@ -62,11 +63,15 @@ Item {
         id:wuerfelPlayer2
         y:450
         stones: player2.notOnTheBoard
-        enabled:if(playerAnDerReihe==player2.playerId){
+        enabled:if(playerAnDerReihe==player2.playerId&&wurfBereit){
                              return true
                          }
                          else{
                              return false
                          }
+    }
+    WinnerDialog{
+        id:winnerDialog
+        visible: finishWinner
     }
 }

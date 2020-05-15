@@ -1,30 +1,20 @@
-var isEqual = function (value, other) {
+function isEqual(value, other) {
+    if(value.length!==other.length){
+        return false
+    }
+    for(var i=0;i<value.length;i++){
+        if(value[i]!==other[i]){
+            return false
+        }
+    }
+    return true
 
-    // Get the value type
-    var type = Object.prototype.toString.call(value);
-
-    // If the two objects are not the same type, return false
-    if (type !== Object.prototype.toString.call(other)) return false;
-
-    // If items are not an object or array, return false
-    if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
-
-    // Compare the length of the length of the two items
-    var valueLen = type === '[object Array]' ? value.length : Object.keys(value).length;
-    var otherLen = type === '[object Array]' ? other.length : Object.keys(other).length;
-    if (valueLen !== otherLen) return false;
-
-    // More tests will go here...
-
-    // If nothing failed, return true
-    return true;
-
-};
+}
 
 function checkIdInArray(playerArr, id){
 
         for(var i=0;i<playerArr.length;i++){
-            if(playerArr[i]==id){
+            if(playerArr[i]===id){
 
                 return true
             }
@@ -41,10 +31,10 @@ function leeresArray(arrLength){
 
 function checkIDNeighbours(array,id1,id2){
     for(var i=1;i<array.length-1;i++){
-        if(array[i]==id1&&array[i+1]==id2){
+        if(array[i]===id1&&array[i+1]===id2){
             return true
         }
-        if(array[i]==id1&&array[i-1]==id2){
+        if(array[i]===id1&&array[i-1]===id2){
             return true
         }
 }
@@ -106,6 +96,7 @@ function moeglicherZug(){
     var weg=[]
     var notOnFeld
     var score
+    wurfBereit=false
     if(playerAnDerReihe==player1.playerId){
         notOnFeld=player1.notOnTheBoard
         weg=player1.way
@@ -120,19 +111,19 @@ function moeglicherZug(){
     prof=Logic.leeresArray(8*3)
     //Startstein
     if(wurf-1>=0&&notOnFeld>0){
-        if(playerPos[weg[wurf-1]]!=playerAnDerReihe){
+        if(playerPos[weg[wurf-1]]!==playerAnDerReihe){
             prof[weg[wurf-1]]=1
         }
     }
     //weiterhüpfen
     var tempBurgJump=false
     for(var j=0;j<weg.length;j++){
-        if(felderFunktion[weg[j+wurf]]==burg&&wurf>0&&playerPos[weg[j+wurf]]!=0&&playerPos[weg[j+wurf]]!=playerAnDerReihe){
+        if(felderFunktion[weg[j+wurf]]===burg&&wurf>0&&playerPos[weg[j+wurf]]!==0&&playerPos[weg[j+wurf]]!==playerAnDerReihe){
             wurf++
             burgJump=true
             tempBurgJump=true
         }
-        if(playerPos[weg[j+wurf]]!=playerAnDerReihe&&playerPos[weg[j]]==playerAnDerReihe){
+        if(playerPos[weg[j+wurf]]!==playerAnDerReihe&&playerPos[weg[j]]===playerAnDerReihe){
             prof[weg[j+wurf]]=1
         }
         if(tempBurgJump){
@@ -140,18 +131,21 @@ function moeglicherZug(){
            wurf--
         }
     }
+    if(isEqual(prof,leeresArray(prof.length))&&wurf>0){
+                naechsterZug()
+            }
     return prof
 }
 
 function platzieren(id){
     var tempPos=[]
+    var prePos=[]
     tempPos=playerPos
+    prePos=playerPos
     var weg=[]
 
-    if(burgJump&&id==felderFunktion.indexOf(burg)+1){
+    if(burgJump&&id===felderFunktion.indexOf(burg)+1){
         wurf++
-        console.debug("burgjump")
-
     }
     burgJump=false
     //console.debug(wurf)
@@ -171,10 +165,7 @@ function platzieren(id){
             player1.notOnTheBoard++
         }
     }
-
     tempPos[id]=playerAnDerReihe
-    console.debug("wurf "+wurf+" "+weg[weg.indexOf(id)]+" new index old :"+weg[weg.indexOf(id)-wurf])
-
     if(weg[weg.indexOf(id)-wurf]>=0){
       tempPos[weg[weg.indexOf(id)-wurf]]=0
     }
@@ -186,7 +177,7 @@ function platzieren(id){
             player2.notOnTheBoard--
         }
     }
-    if(id==weg[weg.length-1]){
+    if(id===weg[weg.length-1]){
         tempPos[id]=0
         if(playerAnDerReihe==player1.playerId){
             player1.score++
@@ -195,11 +186,7 @@ function platzieren(id){
             player2.score++
         }
     }
-
-    console.debug(isEqual(tempPos,playerPos))
-    console.debug(tempPos)
-    console.debug(playerPos)
-    if(felderFunktion[id]==doppeltZiehen||felderFunktion[id]==burg&&!isEqual(tempPos,playerPos)){
+    if(felderFunktion[id]===doppeltZiehen||felderFunktion[id]===burg){
         if(playerAnDerReihe==player1.playerId){
             playerAnDerReihe=player2.playerId
         }
@@ -212,13 +199,26 @@ function platzieren(id){
 }
 
 function naechsterZug(){
-
-    wurfBereit=true
     posiblePos=leeresArray(xFelder*yFelder)
-    if(playerAnDerReihe==player1.playerId){
-        playerAnDerReihe=player2.playerId
+    if(player1.score==startstones||player2.score==startstones){
+        finishWinner=true
     }
     else{
-        playerAnDerReihe=player1.playerId
+        wurfBereit=true
+        if(playerAnDerReihe==player1.playerId){
+            playerAnDerReihe=player2.playerId
+        }
+        else{
+            playerAnDerReihe=player1.playerId
+        }
     }
+}
+
+function newGame(){
+    playerAnDerReihe=Math.floor((Math.random() * 2))+1
+    player1.score=0
+    player1.notOnTheBoard=startstones
+    player2.score=0
+    player2.notOnTheBoard=startstones
+    naechsterZug()
 }

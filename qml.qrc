@@ -10,5 +10,6 @@
         <file>Player.qml</file>
         <file>Stone.qml</file>
         <file>NotOnTheBoard.qml</file>
+        <file>WinnerDialog.qml</file>
     </qresource>
 </RCC>

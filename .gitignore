@@ -32,3 +32,8 @@ build-URGame
 *.exe
 *.out
 *.app
+build-URGame/Makefile
+build-URGame/Makefile
+build-URGame/Makefile
+build-URGame/main_qml.cpp
+build-URGame/Feld_qml.cpp
