@@ -18,7 +18,7 @@ Item {
     property bool burgJump: false
     property int xFelder: 8
     property int yFelder: 3
-    property int startstones: 1
+    property int startstones: 7
     property bool finishWinner: false
 
     Player{

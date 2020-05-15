@@ -62,7 +62,16 @@ Dialog  {
                Logic.newGame()
                winner.close()
            }
+           SpinBox {
+               value: 8
+               onValueChanged: {
+                   startstones=value
+               }
+
+               anchors.horizontalCenter: parent.horizontalCenter
+           }
         }
+
         }
     }
 

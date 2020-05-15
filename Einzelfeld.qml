@@ -76,7 +76,10 @@ Rectangle {
             visible:Logic.checkStreetDown(player1.way,player2.way,einzelFeld.feldID)
         }
         Stone{
-            visible:if(playerPos[feldID]!=0){
+            d:spielfeldLaenge*0.6
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            visible:if(playerPos[feldID]!==0){
                         return true
                     }
                 else{
@@ -86,14 +89,6 @@ Rectangle {
 
         }
     }
-
-    Text{
-        text: einzelFeld.feldID
-        anchors.centerIn: einzelFeld.Center
-
-    }
-
-
     MouseArea{
         anchors.fill:parent
         onClicked: {
