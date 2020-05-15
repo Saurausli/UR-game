@@ -16,7 +16,7 @@ Release
 *.so
 *.dylib
 *.dll
-build-URGame
+build-URGame/
 *.user
 # Fortran module files
 *.mod
