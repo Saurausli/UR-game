@@ -1,7 +1,10 @@
 import QtQuick 2.0
 import "JSCode.js" as Logic
-Item {
+Rectangle {
     id:ur
+    width: feldLaenge*xFelder
+    height: feldLaenge*(yFelder+2)
+    color: "saddlebrown"
     anchors.fill: parent
     property int playerAnDerReihe: player1.playerId
     property bool wurfBereit: true
@@ -20,58 +23,78 @@ Item {
     property int yFelder: 3
     property int startstones: 7
     property bool finishWinner: false
-
-    Player{
-        id:player1
-        playerColor: "maroon"
-        playerId:1
-        way:wegPlayer1
+    TopBar{
+        id:topBar
+        anchors.bottom: spielBrettItem.top
+        anchors.top: ur.top
+        width: spielBrettItem.width
+        anchors.horizontalCenter: ur.horizontalCenter
     }
-    Player{
-        id:player2
-        playerColor: "orange"
-        playerId:2
-        way:wegPlayer2
-    }
-    Text {
-        id: punktestand
-        x:600
-        y:10
-        font.pixelSize: 20
-        text: player1.score+" :: "+player2.score
-    }
-
-    Feld{
-        id: spielBrett
-        x:0
-        y:150
-    }
-
-    Wuerfel{
-        id:wuerfelPlayer1
-        anchors.bottom: spielBrett.top
-        anchors.left: spielBrett.left
-        stones: player1.notOnTheBoard
-        enabled: if(playerAnDerReihe==player1.playerId&&wurfBereit){
-                     return true
-                 }
-                 else{
-                     return false
-                 }
-    }
-    Wuerfel{
-        id:wuerfelPlayer2
-        y:450
-        stones: player2.notOnTheBoard
-        enabled:if(playerAnDerReihe==player2.playerId&&wurfBereit){
-                             return true
-                         }
-                         else{
-                             return false
-                         }
+    Item{
+        id:spielBrettItem
+        anchors.verticalCenter: ur.verticalCenter
+        anchors.horizontalCenter: ur.horizontalCenter
+        width: feldLaenge*ur.xFelder
+        height:feldLaenge*(ur.yFelder+2)
+        Player{
+            id:player1
+            playerColor: "maroon"
+            playerId:1
+            way:wegPlayer1
+        }
+        Player{
+            id:player2
+            playerColor: "orange"
+            playerId:2
+            way:wegPlayer2
+        }
+        Wuerfel{
+            id:wuerfelPlayer1
+            anchors.left: spielBrettItem.left
+            anchors.right: spielBrettItem.right
+            anchors.bottom: spielBrett.top
+            anchors.top:spielBrettItem.top
+            playerId:player1.playerId
+            stones: player1.notOnTheBoard
+            enabled: if(playerAnDerReihe==player1.playerId&&wurfBereit){
+                         return true
+                     }
+                     else{
+                         return false
+                     }
+        }
+        Feld{
+            id: spielBrett
+            y:(spielBrettItem.height-spielBrett.height)/2
+            anchors.verticalCenter: spielBrettItem.verticalCenter
+            anchors.horizontalCenter: spielBrettItem.horizontalCenter
+        }
+        Wuerfel{
+            id:wuerfelPlayer2
+            anchors.left: spielBrettItem.left
+            anchors.right: spielBrettItem.right
+            anchors.bottom: spielBrettItem.bottom
+            anchors.top:spielBrett.bottom
+            playerId:player2.playerId
+            stones: player2.notOnTheBoard
+            enabled:if(playerAnDerReihe==player2.playerId&&wurfBereit){
+                                 return true
+                             }
+                             else{
+                                 return false
+                             }
+        }
     }
     WinnerDialog{
         id:winnerDialog
         visible: finishWinner
     }
+    BottomBar{
+        id:bottomBar
+        anchors.top: spielBrettItem.bottom
+        anchors.bottom: ur.bottom
+        anchors.horizontalCenter: ur.horizontalCenter
+        width: spielBrettItem.width
+    }
+
 }

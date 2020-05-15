@@ -5,10 +5,18 @@ import "JSCode.js" as Logic
 Window {
     id:window
     visible: true
-    width: 1000
-    height: 600
+    property int feldLaenge: if(width/8<height/6){
+                                 return width/8
+                             }
+                             else{
+                                 return height/6
+                             }
+
+    width: 800
+    height:600
     title: qsTr("UR Schach")
     URSpiel{
-
+        id:urgame
+        anchors.fill: parent
     }
 }
