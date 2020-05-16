@@ -21,7 +21,7 @@ Rectangle {
     property bool burgJump: false
     property int xFelder: 8
     property int yFelder: 3
-    property int startstones: 7
+    property int startstones: 1
     property bool finishWinner: false
     TopBar{
         id:topBar
@@ -36,6 +36,7 @@ Rectangle {
         anchors.horizontalCenter: ur.horizontalCenter
         width: feldLaenge*ur.xFelder
         height:feldLaenge*(ur.yFelder+2)
+
         Player{
             id:player1
             playerColor: "maroon"

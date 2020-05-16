@@ -6,13 +6,28 @@ import QtQuick.Layouts 1.3
 import Qt.labs.platform 1.1
 
 Item {
+
+    Stone{
+        player: player1.playerId
+        d:parent.height*0.6
+        anchors.right: titel.left
+        anchors.rightMargin: parent.height*0.2
+        anchors.verticalCenter: parent.verticalCenter
+    }
     Text {
         id: titel
-        text: "THE UR GAME"
+        text: player1.score+" :: "+player2.score
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: parent.height*0.8
         font.bold: true
         font.family: "GothicE"
+    }
+    Stone{
+        player: player2.playerId
+        d:parent.height*0.6
+        anchors.left: titel.right
+        anchors.leftMargin: parent.height*0.2
+        anchors.verticalCenter: parent.verticalCenter
     }
     ToggelButton{
         anchors.right: parent.right
