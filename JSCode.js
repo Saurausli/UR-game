@@ -186,6 +186,10 @@ function platzieren(id){
             player2.score++
         }
     }
+    if(player1.score==startstones||player2.score==startstones){
+        console.debug(playerAnDerReihe+" Won "+finishWinner)
+        finishWinner=true
+    }
     if(felderFunktion[id]===doppeltZiehen||felderFunktion[id]===burg){
         if(playerAnDerReihe==player1.playerId){
             playerAnDerReihe=player2.playerId
@@ -200,10 +204,6 @@ function platzieren(id){
 
 function naechsterZug(){
     posiblePos=leeresArray(xFelder*yFelder)
-    if(player1.score==startstones||player2.score==startstones){
-        finishWinner=true
-    }
-    else{
         wurfBereit=true
         if(playerAnDerReihe==player1.playerId){
             playerAnDerReihe=player2.playerId
@@ -211,14 +211,15 @@ function naechsterZug(){
         else{
             playerAnDerReihe=player1.playerId
         }
-    }
 }
 
 function newGame(){
     playerAnDerReihe=Math.floor((Math.random() * 2))+1
+    playerPos=leeresArray(xFelder*yFelder)
     player1.score=0
     player1.notOnTheBoard=startstones
     player2.score=0
     player2.notOnTheBoard=startstones
+    finishWinner=false
     naechsterZug()
 }
