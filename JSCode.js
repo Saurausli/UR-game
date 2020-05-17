@@ -143,7 +143,7 @@ function platzieren(id){
     tempPos=playerPos
     prePos=playerPos
     var weg=[]
-
+    console.debug("platziere auf "+id+" wurf: "+wurf)
     if(burgJump&&id===felderFunktion.indexOf(burg)+1){
         wurf++
     }
@@ -219,13 +219,13 @@ function naechsterZug(){
     else{
         playerAnDerReihe=player1.playerId
     }
-
+    console.debug()
+    console.debug("next Zug "+playerAnDerReihe)
     if(gameMode===singelPlayer){
-        console.debug("Singelplayer move with")
         if(playerAnDerReihe==player1.playerId&&!player1.manuell){
                 singelPlayerMove(player1.playerId)
         }
-        if(playerAnDerReihe==player2.playerId&&!player2.manuell){
+        else if(playerAnDerReihe==player2.playerId&&!player2.manuell){
                 singelPlayerMove(player2.playerId)
         }
     }
@@ -263,14 +263,20 @@ function checkForWinner(){
 }
 
 function singelPlayerMove(id){
-
+    console.debug(id+ " wuerfeln Singelplayer")
     if(id===player1.playerId){
         wuerfelPlayer1.wuerfeln()
     }
     else{
         wuerfelPlayer2.wuerfeln()
     }
+}
+
+function setSingelPlayerMove(){
+    console.debug(posiblePos)
     if(posiblePos.indexOf(1)>=0){
+        console.debug(playerAnDerReihe+ " platziere Singelplayer")
         platzieren(posiblePos.indexOf(1))
     }
+    ur.posiblePos=Logic.leeresArray(xFelder*yFelder)
 }

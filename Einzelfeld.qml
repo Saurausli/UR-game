@@ -12,6 +12,7 @@ Rectangle {
                 return "beige"
            }
              else{
+               console.debug(posiblePos+" posibel")
                 return "lime"
             }
     height: spielfeldLaenge

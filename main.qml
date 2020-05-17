@@ -5,7 +5,7 @@ import "JSCode.js" as Logic
 Window {
     id:window
     visible: true
-    visibility: "FullScreen"
+    //visibility: "FullScreen"
     property int feldLaenge: if(width/8<height/6){
                                  return width/8
                              }
@@ -18,12 +18,12 @@ Window {
     title: qsTr("UR Schach")
     StartScreen{
         id:startScreen
-        visible: true
+        visible: false
     }
 
     URSpiel{
         id:urgame
         anchors.fill: parent
-        visible:false
+        visible:true
     }
 }
