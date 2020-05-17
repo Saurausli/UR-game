@@ -25,7 +25,9 @@ Rectangle {
     property int startstones: 7
     property bool finishWinner: false
     property bool gameStarted: false
-
+    property int singelPlayer: 1
+    property int multiPlayerLocal: 2
+    property int gameMode: 2
 
     TopBar{
         id:topBar
@@ -62,13 +64,14 @@ Rectangle {
             anchors.top:spielBrettItem.top
             playerId:player1.playerId
             stones: player1.notOnTheBoard
-            enabled: if(playerAnDerReihe==player1.playerId&&wurfBereit){
+            enabled: if(playerAnDerReihe==player1.playerId&&wurfBereit&&player1.manuell){
                          return true
                      }
                      else{
                          return false
                      }
         }
+
         Feld{
             id: spielBrett
             y:(spielBrettItem.height-spielBrett.height)/2
@@ -83,7 +86,7 @@ Rectangle {
             anchors.top:spielBrett.bottom
             playerId:player2.playerId
             stones: player2.notOnTheBoard
-            enabled:if(playerAnDerReihe==player2.playerId&&wurfBereit){
+            enabled:if(playerAnDerReihe==player2.playerId&&wurfBereit&&player2.manuell){
                                  return true
                              }
                              else{

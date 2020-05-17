@@ -49,15 +49,19 @@ Rectangle{
     MouseArea{
         anchors.fill: parent
         onClicked: {
-            wurf=wuerfel1.wuerfeln()+wuerfel2.wuerfeln()+wuerfel3.wuerfeln()+wuerfel4.wuerfeln()
-            individualWurf=wurf
-            wurfBereit=false
-            ur.posiblePos=Logic.moeglicherZug()
-            if(wurf==0){
-                Logic.naechsterZug()
-            }
+          wuerfeln()
         }
     }
+    function wuerfeln(){
+        wurf=wuerfel1.wuerfeln()+wuerfel2.wuerfeln()+wuerfel3.wuerfeln()+wuerfel4.wuerfeln()
+        individualWurf=wurf
+        wurfBereit=false
+        ur.posiblePos=Logic.moeglicherZug()
+        if(wurf==0){
+            Logic.naechsterZug()
+        }
+    }
+
     NotOnTheBoard{
         id:notOnTheBoard
         playerID: playerId

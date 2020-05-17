@@ -212,30 +212,65 @@ function platzieren(id){
 
 function naechsterZug(){
     posiblePos=leeresArray(xFelder*yFelder)
-        wurfBereit=true
-        if(playerAnDerReihe==player1.playerId){
-            playerAnDerReihe=player2.playerId
+    wurfBereit=true
+    if(playerAnDerReihe==player1.playerId){
+        playerAnDerReihe=player2.playerId
+    }
+    else{
+        playerAnDerReihe=player1.playerId
+    }
+
+    if(gameMode===singelPlayer){
+        console.debug("Singelplayer move with")
+        if(playerAnDerReihe==player1.playerId&&!player1.manuell){
+                singelPlayerMove(player1.playerId)
         }
-        else{
-            playerAnDerReihe=player1.playerId
+        if(playerAnDerReihe==player2.playerId&&!player2.manuell){
+                singelPlayerMove(player2.playerId)
         }
+    }
 }
 
-function newGame(){
+function newGame(mode){
     playerAnDerReihe=Math.floor((Math.random() * 2))+1
     playerPos=leeresArray(xFelder*yFelder)
     player1.score=0
     player1.notOnTheBoard=startstones
     player2.score=0
     player2.notOnTheBoard=startstones
-    console.debug(startstones)
     finishWinner=false
     gameStarted=true
+    openDialog=false
+    //modus spezifische grundeinstellungen
+    gameMode=mode
+    if(mode===singelPlayer){
+        player1.manuell=false
+    }
+    else{
+        player1.manuell=true
+    }
+
+    player2.manuell=true
+    console.debug("start game")
     naechsterZug()
 }
+
 function checkForWinner(){
     if(player1.score==startstones||player2.score==startstones){
         return true
     }
     return false
+}
+
+function singelPlayerMove(id){
+
+    if(id===player1.playerId){
+        wuerfelPlayer1.wuerfeln()
+    }
+    else{
+        wuerfelPlayer2.wuerfeln()
+    }
+    if(posiblePos.indexOf(1)>=0){
+        platzieren(posiblePos.indexOf(1))
+    }
 }

@@ -75,18 +75,26 @@ Rectangle  {
             text: "Multiplayer local"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width*0.5
-            height: parent.height*0.2
+            height: parent.height*0.15
             onClicked: {
-               Logic.newGame()
-               finishWinner=false
-               openDialog=false
+               Logic.newGame(multiPlayerLocal)
+
+            }
+        }
+        Button {
+            text: "Singelplayer"
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width*0.5
+            height: parent.height*0.15
+            onClicked: {
+               Logic.newGame(singelPlayer)
             }
         }
         Button {
             text: "Back to Game"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width*0.5
-            height: parent.height*0.2
+            height: parent.height*0.15
             onClicked: {
                openDialog=false
             }
@@ -97,7 +105,7 @@ Rectangle  {
             text: "Quit"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width*0.5
-            height: parent.height*0.2
+            height: parent.height*0.15
             onClicked: {
                window.close()
             }
