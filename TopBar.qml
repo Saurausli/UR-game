@@ -29,6 +29,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
     }
     ToggelButton{
+        id:fullscreen
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -43,4 +44,16 @@ Item {
             window.visibility = "FullScreen"
         }
     }
+    Button{
+        anchors.right: fullscreen.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.margins: parent.height*0.05
+        width:parent.width/11
+        text: "Home"
+        onClicked: {
+           openDialog=true
+        }
+    }
+
 }

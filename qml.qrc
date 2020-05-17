@@ -18,5 +18,7 @@
         <file>StartScreen.qml</file>
         <file>SaurausliLogo.qml</file>
         <file>Text.qml</file>
+        <file>NewGameBildschirm.qml</file>
+        <file>SpinBox.qml</file>
     </qresource>
 </RCC>

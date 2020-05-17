@@ -186,10 +186,7 @@ function platzieren(id){
             player2.score++
         }
     }
-    if(player1.score==startstones||player2.score==startstones){
-        console.debug(playerAnDerReihe+" Won "+finishWinner)
-        finishWinner=true
-    }
+    finishWinner=checkForWinner()
     if(felderFunktion[id]===doppeltZiehen||felderFunktion[id]===burg){
         if(playerAnDerReihe==player1.playerId){
             playerAnDerReihe=player2.playerId
@@ -221,5 +218,12 @@ function newGame(){
     player2.score=0
     player2.notOnTheBoard=startstones
     finishWinner=false
+    gameStarted=true
     naechsterZug()
+}
+function checkForWinner(){
+    if(player1.score==startstones||player2.score==startstones){
+        return true
+    }
+    return false
 }

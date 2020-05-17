@@ -9,6 +9,7 @@ Rectangle {
     property int playerAnDerReihe: player1.playerId
     property bool wurfBereit: true
     property int wurf: 0
+    property bool openDialog: true
     property variant playerPos: Logic.leeresArray(8*3)
     property variant posiblePos: Logic.leeresArray(8*3)
     property variant wegPlayer1: [3,2,1,0,8,9,10,11,12,13,14,15,7,6,5]
@@ -23,12 +24,16 @@ Rectangle {
     property int yFelder: 3
     property int startstones: 7
     property bool finishWinner: false
+    property bool gameStarted: false
+
+
     TopBar{
         id:topBar
         anchors.bottom: spielBrettItem.top
         anchors.top: ur.top
         width: spielBrettItem.width
         anchors.horizontalCenter: ur.horizontalCenter
+        enabled: !openDialog
     }
     Item{
         id:spielBrettItem
@@ -36,7 +41,7 @@ Rectangle {
         anchors.horizontalCenter: ur.horizontalCenter
         width: feldLaenge*ur.xFelder
         height:feldLaenge*(ur.yFelder+2)
-
+        enabled: !openDialog
         Player{
             id:player1
             playerColor: "maroon"
@@ -88,7 +93,9 @@ Rectangle {
     }
     WinnerDialog{
         id:winnerDialog
-        visible: finishWinner
+        visible: openDialog||finishWinner
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
     }
     BottomBar{
         id:bottomBar
@@ -96,6 +103,7 @@ Rectangle {
         anchors.bottom: ur.bottom
         anchors.horizontalCenter: ur.horizontalCenter
         width: spielBrettItem.width
+        enabled: !openDialog
     }
 
 }
