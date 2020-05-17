@@ -15,5 +15,8 @@
         <file>BottomBar.qml</file>
         <file>Button.qml</file>
         <file>ToggelButton.qml</file>
+        <file>StartScreen.qml</file>
+        <file>SaurausliLogo.qml</file>
+        <file>Text.qml</file>
     </qresource>
 </RCC>

@@ -35,7 +35,7 @@ Button {
                 return borderDeToggelColor
                }
     signal toggeled
-    signal deToggled
+    signal deToggeled
 
     onClicked: {
         toggel= !toggel
@@ -43,7 +43,7 @@ Button {
             toggeled()
         }
         else{
-            deToggled()
+            deToggeled()
         }
     }
 }

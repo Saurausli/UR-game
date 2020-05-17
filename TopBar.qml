@@ -20,7 +20,6 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: parent.height*0.8
         font.bold: true
-        font.family: "GothicE"
     }
     Stone{
         player: player2.playerId
@@ -35,13 +34,13 @@ Item {
         anchors.bottom: parent.bottom
         anchors.margins: parent.height*0.05
         width:parent.width/8
-        textDeToggeld: "fullscreen"
-        textToggel: "exit fullscreen"
+        textToggel:  "fullscreen"
+        textDeToggeld: "exit fullscreen"
         onToggeled: {
-            window.visibility= "FullScreen"
+            window.visibility= "Windowed"
         }
-        onDeToggled: {
-            window.visibility = "Windowed"
+        onDeToggeled: {
+            window.visibility = "FullScreen"
         }
     }
 }
