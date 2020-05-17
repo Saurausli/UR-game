@@ -156,7 +156,7 @@ function platzieren(id){
     else{
         weg=player2.way
     }
-
+    //stein fressen
     if(tempPos[id]>0){
         if(playerAnDerReihe==player1.playerId){
             player2.notOnTheBoard++
@@ -166,9 +166,18 @@ function platzieren(id){
         }
     }
     tempPos[id]=playerAnDerReihe
+
+    //alte position löschen
     if(weg[weg.indexOf(id)-wurf]>=0){
-      tempPos[weg[weg.indexOf(id)-wurf]]=0
+        if(felderFunktion[weg[weg.indexOf(id)-wurf]]===burg&&tempPos[weg[weg.indexOf(id)-wurf]]!=playerAnDerReihe){
+            tempPos[weg[weg.indexOf(id)-wurf-1]]=0
+        }
+        else{
+            tempPos[weg[weg.indexOf(id)-wurf]]=0
+        }
     }
+
+    //neu platzieren
     else{
         if(playerAnDerReihe==player1.playerId){
             player1.notOnTheBoard--
@@ -177,6 +186,8 @@ function platzieren(id){
             player2.notOnTheBoard--
         }
     }
+
+    //zielbereich
     if(id===weg[weg.length-1]){
         tempPos[id]=0
         if(playerAnDerReihe==player1.playerId){
@@ -217,6 +228,7 @@ function newGame(){
     player1.notOnTheBoard=startstones
     player2.score=0
     player2.notOnTheBoard=startstones
+    console.debug(startstones)
     finishWinner=false
     gameStarted=true
     naechsterZug()

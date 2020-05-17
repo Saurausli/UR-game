@@ -8,11 +8,11 @@ Rectangle  {
     width: parent.width*0.7
     height: parent.height*0.7
     radius: parent.height*0.05
-    color: if(playerAnDerReihe==player1.playerId){
-               return player1.playerColor
+    color: if(playerAnDerReihe==player2.playerId){
+               return player2.playerColor
            }
             else{
-               return player2.playerColor
+               return player1.playerColor
            }
 
     Rectangle{
@@ -91,7 +91,7 @@ Rectangle  {
                openDialog=false
             }
 
-            visible: gameStarted
+            visible: gameStarted&&!finishWinner
         }
         Button {
             text: "Quit"
