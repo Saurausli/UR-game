@@ -46,7 +46,7 @@ Rectangle  {
             anchors.horizontalCenter: parent.horizontalCenter
         }
         SpinBox {
-               value: 8
+               value: startstones
                onValueChanged: {
                    startstones=value
                }
