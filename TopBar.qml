@@ -15,6 +15,12 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
     }
     Text {
+        text: player1.serie+" :: "+player2.serie
+        anchors.left: parent.left
+        font.pixelSize: parent.height*0.6
+        font.bold: true
+    }
+    Text {
         id: titel
         text: player1.score+" :: "+player2.score
         anchors.horizontalCenter: parent.horizontalCenter

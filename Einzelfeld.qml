@@ -12,7 +12,7 @@ Rectangle {
                 return "beige"
            }
              else{
-               console.debug(posiblePos+" posibel")
+               //console.debug(posiblePos+" posibel")
                 return "lime"
             }
     height: spielfeldLaenge
@@ -20,6 +20,11 @@ Rectangle {
     x:0
     y:0
     Rectangle{
+        Text {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            text: feldID
+        }
 
         x: einzelFeld.spielfeldLaenge*rand
         y: einzelFeld.spielfeldLaenge*rand

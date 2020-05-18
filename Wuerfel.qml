@@ -25,21 +25,18 @@ Rectangle{
             id:wuerfel1
             x:wuerfelArea.width*0.3
             y:wuerfelArea.height*0.35
-            onFinishedChanged: {
+            onFinished: {
                 wurf=wuerfel1.value+wuerfel2.value+wuerfel3.value+wuerfel4.value
                 individualWurf=wurf
                 wurfBereit=false
-
                 if(wurf==0){
                     Logic.naechsterZug()
                 }
-                var id=0
-                ur.posiblePos=Logic.moeglicherZug()
-                if(!player1.manuell&&playerAnDerReihe===player1.playerId){
-                    Logic.setSingelPlayerMove()
-                }
-                else if(!player2.manuell&&playerAnDerReihe===player2.playerId){
-                    Logic.setSingelPlayerMove()
+                else{
+                    ur.posiblePos=Logic.moeglicherZug()
+                    if(!anDerReihe.manuell){
+                        Logic.setSingelPlayerMove()
+                    }
                 }
             }
         }
@@ -70,11 +67,11 @@ Rectangle{
     }
     function wuerfeln(){
         wurf=0
-        posiblePos=Logic.leeresArray(xFelder*yFelder)
         wuerfel1.wuerfeln()
         wuerfel2.wuerfeln()
         wuerfel3.wuerfeln()
         wuerfel4.wuerfeln()
+        posiblePos=Logic.leeresArray(xFelder*yFelder)
     }
 
     NotOnTheBoard{

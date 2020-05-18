@@ -8,12 +8,7 @@ Rectangle  {
     width: parent.width*0.7
     height: parent.height*0.7
     radius: parent.height*0.05
-    color: if(playerAnDerReihe==player2.playerId){
-               return player2.playerColor
-           }
-            else{
-               return player1.playerColor
-           }
+    color:  anDerReihe.playerColor
 
     Rectangle{
         width: parent.width*0.9
@@ -29,7 +24,7 @@ Rectangle  {
 
         Text {
             id:winnerText
-            text: "Player "+playerAnDerReihe+" won "
+            text: "Player "+anDerReihe.playerId+" won "
             color: "darkgreen"
             font.bold: true
             font.pixelSize: parent.height*0.1
@@ -75,7 +70,7 @@ Rectangle  {
             text: "Multiplayer local"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width*0.5
-            height: parent.height*0.15
+            height: parent.height*0.1
             onClicked: {
                Logic.newGame(multiPlayerLocal)
 
@@ -85,16 +80,27 @@ Rectangle  {
             text: "Singelplayer"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width*0.5
-            height: parent.height*0.15
+            height: parent.height*0.1
             onClicked: {
                Logic.newGame(singelPlayer)
+            }
+        }
+        Button {
+            text: "Autoplay"
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width*0.5
+            height: parent.height*0.1
+            onClicked: {
+                player1.serie=0
+                player2.serie=0
+               Logic.newGame(autoPlayer)
             }
         }
         Button {
             text: "Back to Game"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width*0.5
-            height: parent.height*0.15
+            height: parent.height*0.1
             onClicked: {
                openDialog=false
             }
@@ -105,7 +111,7 @@ Rectangle  {
             text: "Quit"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width*0.5
-            height: parent.height*0.15
+            height: parent.height*0.1
             onClicked: {
                window.close()
             }
