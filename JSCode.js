@@ -1,17 +1,6 @@
 .import "Algorithmus.js" as Algorithmus
+.import "ArrayHandler.js" as Array
 
-function isEqual(value, other) {
-    if(value.length!==other.length){
-        return false
-    }
-    for(var i=0;i<value.length;i++){
-        if(value[i]!==other[i]){
-            return false
-        }
-    }
-    return true
-
-}
 function countElements(arr, value) {
     var count=0
     for(var i=0;i<arr.length;i++){
@@ -33,13 +22,7 @@ function checkIdInArray(playerArr, id){
     }
     return false
 }
-function leeresArray(arrLength){
-    var array=[]
-    for(var i=0;i<arrLength;i++){
-        array[i]=0
-    }
-    return array
-}
+
 
 function checkIDNeighbours(array,id1,id2){
     for(var i=1;i<array.length-1;i++){
@@ -108,7 +91,7 @@ function moeglicherZug(){
     //console.debug("ermittle moeglichkeiten")
     wurfBereit=false
     var prof=[]
-    prof=leeresArray(8*3)
+    prof=Array.leeresArray(8*3)
     //Startstein
     if(wurf-1>=0&&anDerReihe.notOnTheBoard>0){
         if(playerPos[anDerReihe.way[wurf-1]]!==anDerReihe.playerId){
@@ -136,7 +119,7 @@ function moeglicherZug(){
             jump=1
         }
     }
-    if(isEqual(prof,leeresArray(prof.length))&&wurf>0){
+    if(Array.isEqual(prof,Array.leeresArray(prof.length))&&wurf>0){
                 naechsterZug()
             }
     return prof
@@ -148,6 +131,7 @@ function platzieren(id){
     var prePos=[]
     tempPos=playerPos
     prePos=playerPos
+    //console.debug("posibil:\t"+posiblePos)
 
     var weg=[]
     //console.debug("platziere auf "+id+" wurf: "+wurf)
@@ -161,6 +145,7 @@ function platzieren(id){
     }
     tempPos[id]=anDerReihe.playerId
     //alte position löschen
+
     if(weg[weg.indexOf(id)-tempWurf]>=0){
         if(felderFunktion[weg[weg.indexOf(id)-tempWurf]]===burg&&tempPos[weg[weg.indexOf(id)-tempWurf]]!==anDerReihe.playerId){
             tempPos[weg[weg.indexOf(id)-tempWurf-1]]=0
@@ -182,24 +167,28 @@ function platzieren(id){
         anDerReihe.score++
     }
     if(felderFunktion[id]===doppeltZiehen||felderFunktion[id]===burg){
-        //console.debug("doppel Zug")
         changePlayer()
     }
+
     playerPos=tempPos
-    posiblePos=leeresArray(xFelder*yFelder)
-    wurf=0
+    posiblePos=Array.leeresArray(xFelder*yFelder)
+    //console.debug("player:\t"+playerPos)
     finishWinner=checkForWinner()
+    wurf=0
     if(!pause){
         naechsterZug()
     }
     else{
     //console.debug("pause")}
     }
+
 }
 
 function naechsterZug(){
     if(!finishWinner){
-        posiblePos=leeresArray(xFelder*yFelder)
+        gameBericht+=player1.score+";"+player1.notOnTheBoard+";"+player1.score+";"+player1.notOnTheBoard+"\r\n"
+        //console.debug()
+        posiblePos=Array.leeresArray(xFelder*yFelder)
         wurfBereit=true
         changePlayer()
         if(!anDerReihe.manuell){
@@ -223,24 +212,30 @@ function naechsterZug(){
     }
 function changePlayer(){
     if(anDerReihe.playerId===player1.playerId){
-        player1=anDerReihe
-        player2=nichtAnDerReihe
-        anDerReihe=player2
-        nichtAnDerReihe=player1
+
+        ur.player1=ur.anDerReihe
+        ur.player2=ur.nichtAnDerReihe
+        //console.debug(" 1neu an der Reihe"+anDerReihe.playerId)
+        ur.anDerReihe=ur.player2
+        ur.nichtAnDerReihe=ur.player1
     }
     else if(anDerReihe.playerId===player2.playerId){
-        player2=anDerReihe
-        player1=nichtAnDerReihe
-        anDerReihe=player1
-        nichtAnDerReihe=player2
+       // console.debug("2 neu an der Reihe "+ anDerReihe.playerId+"  "+ anDerReihe.way+" "+anDerReihe.notOnTheBoard)
+        ur.player2=ur.anDerReihe
+        ur.player1=ur.nichtAnDerReihe
+
+        ur.anDerReihe=ur.player1
+        ur.nichtAnDerReihe=ur.player2
+
     }
-    //console.debug("neu an der Reihe"+anDerReihe.playerId)
+
 }
 
 function newGame(mode){
     gameMode=mode
+    gameBericht=""
     prePlayerPos=""
-    playerPos=leeresArray(xFelder*yFelder)
+    playerPos=Array.leeresArray(xFelder*yFelder)
     player1.score=0
     player1.notOnTheBoard=startstones
     player2.score=0
@@ -263,11 +258,13 @@ function newGame(mode){
         player2.manuell=true
     }
 
-    if(Math.floor((Math.random() * 2))+1==1){
+    if((gameMode!==autoPlayer&&Math.floor((Math.random() * 2))+1==1)||(gameMode===autoPlayer&&beginner===player2.playerId)){
+        beginner=player1.playerId
         anDerReihe=player1
         nichtAnDerReihe=player2
     }
     else{
+        beginner=player2.playerId
         nichtAnDerReihe=player1
         anDerReihe=player2
     }
@@ -276,7 +273,7 @@ function newGame(mode){
     naechsterZug()
 }
 function checkForError(){
-    prePlayerPos+=playerPos+"\n"
+    prePlayerPos+=playerPos+" 1P "+player1.notOnTheBoard+" P2 "+player2.notOnTheBoard+"\n"
     var err = false
     var errorMess= "Player "+anDerReihe.playerId+"\n"
     if(countElements(playerPos,anDerReihe.playerId)+anDerReihe.score+anDerReihe.notOnTheBoard!==startstones){
@@ -294,6 +291,8 @@ function checkForError(){
 function checkForWinner(){
     checkForError()
     if(anDerReihe.score===startstones){
+        console.debug(gameBericht)
+        //console.debug(player1.score+";"+player2.score+";")
         return true
     }
     return false
@@ -320,12 +319,6 @@ function checkForPossiblities(arr){
 }
 function setSingelPlayerMove(){
     //console.debug(posiblePos)
-    if(checkForPossiblities(posiblePos)&&anDerReihe.playerId==player1.playerId){
-        platzieren(Algorithmus.first())
-    }
-    else if(checkForPossiblities(posiblePos)&&anDerReihe.playerId==player2.playerId){
-        platzieren(Algorithmus.last())
-    }
-
-    ur.posiblePos=leeresArray(xFelder*yFelder)
+    platzieren(Algorithmus.getChoise())
+    ur.posiblePos=Array.leeresArray(xFelder*yFelder)
 }

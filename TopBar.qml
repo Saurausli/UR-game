@@ -58,6 +58,7 @@ Item {
         width:parent.width/11
         text: "Home"
         onClicked: {
+           pause=true
            openDialog=true
         }
     }

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import "JSCode.js" as Logic
 import "Algorithmus.js" as Algorithmus
+import "ArrayHandler.js" as Array
 Rectangle {
     id:ur
     width: feldLaenge*xFelder
@@ -12,14 +13,14 @@ Rectangle {
     property int testCount: 0
     property int tests: 100
     property int startPlayer: 0
-
-
+    property string gameBericht: ""
+    property int beginner: player2.playerId
 
     property bool wurfBereit: true
     property int wurf: 0
     property bool openDialog: true
-    property variant playerPos: Logic.leeresArray(8*3)
-    property variant posiblePos: Logic.leeresArray(8*3)
+    property variant playerPos: Array.leeresArray(8*3)
+    property variant posiblePos: Array.leeresArray(8*3)
     property variant wegPlayer1: [3,2,1,0,8,9,10,11,12,13,14,15,7,6,5]
     property variant wegPlayer2:[19,18,17,16,8,9,10,11,12,13,14,15,23,22,21]
     property variant felderFunktion: [2,1,1,1,0,0,2,1, 1,1,1,3,1,1,1,1 ,2,1,1,1,0,0,2,1]
@@ -38,8 +39,20 @@ Rectangle {
     property int multiPlayerLocal: 2
     property int autoPlayer:3
     property int gameMode: 2
-    property variant player1: {'playerId':1, 'playerColor':'maroon', 'notOnTheBoard' : startstones,'manuell':true,'score':0,'way':wegPlayer1,'serie':0}
-    property variant player2: {'playerId':2, 'playerColor':'orange' , 'notOnTheBoard' : startstones,'manuell':true,'score':0,'way':wegPlayer2,'serie':0}
+    property variant player1: {'playerId':1, 'playerColor':'maroon',
+                                'notOnTheBoard' : startstones,
+                                'manuell':true,'score':0,
+                                'way':wegPlayer1,'serie':0,
+                                'last':100, 'first':0, 'burg':0, 'doppelZug':0,
+                                'gefahr':0,'fressen':0,
+                                'saveArea':0}
+    property variant player2: {'playerId':2, 'playerColor':'orange' ,
+                                'notOnTheBoard' : startstones,
+                                'manuell':true,'score':0,
+                                'way':wegPlayer2,'serie':0,
+                                'last':0, 'first':100, 'burg':0, 'doppelZug':0,
+                                'gefahr':0,'fressen':0,
+                                'saveArea':0}
     property variant anDerReihe:player1
     property variant nichtAnDerReihe:player2
     TopBar{
@@ -101,6 +114,11 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
     }
+    Autoplaymanager{
+        id:autoPlayManager
+        visible: false
+    }
+
     BottomBar{
         id:bottomBar
         anchors.top: spielBrettItem.bottom

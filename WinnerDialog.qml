@@ -5,8 +5,8 @@ import QtQuick.Layouts 1.3
 import "JSCode.js" as Logic
 Rectangle  {
     id: winner
-    width: parent.width*0.7
-    height: parent.height*0.7
+    width: parent.width*0.8
+    height: parent.height*0.8
     radius: parent.height*0.05
     color:  anDerReihe.playerColor
 
@@ -63,7 +63,6 @@ Rectangle  {
                    }
                    startstones=value
                }
-
                anchors.horizontalCenter: parent.horizontalCenter
            }
         Button {
@@ -106,6 +105,16 @@ Rectangle  {
             }
 
             visible: gameStarted&&!finishWinner
+        }
+        Button {
+            text: "Algorithmus gewichtung"
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width*0.5
+            height: parent.height*0.1
+            onClicked: {
+                openDialog=false
+               autoPlayManager.visible=true
+            }
         }
         Button {
             text: "Quit"

@@ -24,6 +24,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.top: parent.top
             text: feldID
+            visible: false
         }
 
         x: einzelFeld.spielfeldLaenge*rand

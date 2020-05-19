@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import "JSCode.js" as Logic
-
+import "ArrayHandler.js" as Array
 Rectangle{
     id:wuerfel
     property int stones: 0
@@ -29,15 +29,16 @@ Rectangle{
                 wurf=wuerfel1.value+wuerfel2.value+wuerfel3.value+wuerfel4.value
                 individualWurf=wurf
                 wurfBereit=false
-                if(wurf==0){
+
+                //console.debug(anDerReihe.playerId+" wurf "+wurf)
+                ur.posiblePos=Logic.moeglicherZug()
+                if(wurf===0||Array.isEqual(posiblePos,Array.leeresArray(posiblePos.length))){
+                    //console.debug("wurf ===0|| array leer "+posiblePos)
                     Logic.naechsterZug()
                 }
-                else{
-                    ur.posiblePos=Logic.moeglicherZug()
-                    if(!anDerReihe.manuell){
+                else if(!anDerReihe.manuell){
                         Logic.setSingelPlayerMove()
                     }
-                }
             }
         }
         WuerfelEinzeln{
@@ -71,7 +72,7 @@ Rectangle{
         wuerfel2.wuerfeln()
         wuerfel3.wuerfeln()
         wuerfel4.wuerfeln()
-        posiblePos=Logic.leeresArray(xFelder*yFelder)
+        posiblePos=Array.leeresArray(xFelder*yFelder)
     }
 
     NotOnTheBoard{
