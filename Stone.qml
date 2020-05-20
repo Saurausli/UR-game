@@ -1,10 +1,15 @@
 import QtQuick 2.0
 
-Rectangle {
+Item {
     property int d: 80
     property real rand: 0.1
     property int player: 0
-    color: "darkslategray"
+    width:d
+    height:d
+    Rectangle{
+        anchors.fill: parent
+        color: "darkslategray"
+        radius: d/2
     Rectangle{
         x:d*rand
         y:d*rand
@@ -18,7 +23,5 @@ Rectangle {
         height: d*(1-(rand*2))
         radius: (d*(1-(rand*2)))/2
     }
-    width:d
-    height:d
-    radius: d/2
+    }
 }

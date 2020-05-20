@@ -71,6 +71,7 @@ Rectangle  {
             width: parent.width*0.5
             height: parent.height*0.1
             onClicked: {
+               pause=false
                Logic.newGame(multiPlayerLocal)
 
             }
@@ -81,6 +82,7 @@ Rectangle  {
             width: parent.width*0.5
             height: parent.height*0.1
             onClicked: {
+                pause=false
                Logic.newGame(singelPlayer)
             }
         }
@@ -92,6 +94,7 @@ Rectangle  {
             onClicked: {
                 player1.serie=0
                 player2.serie=0
+                pause=false
                Logic.newGame(autoPlayer)
             }
         }
@@ -101,7 +104,8 @@ Rectangle  {
             width: parent.width*0.5
             height: parent.height*0.1
             onClicked: {
-               openDialog=false
+               openDialog=fal
+                pause=falsese
             }
 
             visible: gameStarted&&!finishWinner
@@ -113,6 +117,7 @@ Rectangle  {
             height: parent.height*0.1
             onClicked: {
                 openDialog=false
+                pause=false
                autoPlayManager.visible=true
             }
         }

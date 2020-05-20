@@ -124,11 +124,23 @@ function moeglicherZug(){
             }
     return prof
 }
+function getPrePos(){
+    //console.debug(prePlayerPos.length+" === "+playerPos.length)
+    if(prePlayerPos.length===playerPos.length){
+        for(var i=0;i<prePlayerPos.length;i++){
+            //console.debug(prePlayerPos[i]+" ==="+playerPos[i]+" id="+i)
+        if(prePlayerPos[i]!==playerPos[i]) return i
+        }
+    }
+    if(anDerReihe.playerID===player1.playerId)return 5
+    else return 21
+}
 
 function platzieren(id){
     //console.debug("plaziere auf "+id)
     var tempPos=[]
     var prePos=[]
+    prePlayerPos=playerPos
     tempPos=playerPos
     prePos=playerPos
     //console.debug("posibil:\t"+posiblePos)
@@ -234,7 +246,7 @@ function changePlayer(){
 function newGame(mode){
     gameMode=mode
     gameBericht=""
-    prePlayerPos=""
+    prePlayerPos=Array.leeresArray(xFelder*yFelder)
     playerPos=Array.leeresArray(xFelder*yFelder)
     player1.score=0
     player1.notOnTheBoard=startstones
@@ -273,7 +285,6 @@ function newGame(mode){
     naechsterZug()
 }
 function checkForError(){
-    prePlayerPos+=playerPos+" 1P "+player1.notOnTheBoard+" P2 "+player2.notOnTheBoard+"\n"
     var err = false
     var errorMess= "Player "+anDerReihe.playerId+"\n"
     if(countElements(playerPos,anDerReihe.playerId)+anDerReihe.score+anDerReihe.notOnTheBoard!==startstones){
@@ -281,7 +292,6 @@ function checkForError(){
         err=true
     }
     if(err===true){
-        errorMess+="pre Position\n"+prePlayerPos+"\n"
         console.error(errorMess)
         console.error("Pausiere aufgrund von Error")
         pause=true

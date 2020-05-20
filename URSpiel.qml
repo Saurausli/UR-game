@@ -9,7 +9,6 @@ Rectangle {
     color: "saddlebrown"
     anchors.fill: parent
     property bool pause: false
-    property string prePlayerPos
     property int testCount: 0
     property int tests: 100
     property int startPlayer: 0
@@ -19,6 +18,7 @@ Rectangle {
     property bool wurfBereit: true
     property int wurf: 0
     property bool openDialog: true
+    property variant prePlayerPos: Array.leeresArray(8*3)
     property variant playerPos: Array.leeresArray(8*3)
     property variant posiblePos: Array.leeresArray(8*3)
     property variant wegPlayer1: [3,2,1,0,8,9,10,11,12,13,14,15,7,6,5]

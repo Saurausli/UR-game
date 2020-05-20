@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.11
 import "JSCode.js" as Logic
 Rectangle {
     id:einzelFeld
@@ -7,7 +7,6 @@ Rectangle {
     property int feldID: 0
     property int strassenBreite: spielfeldLaenge*0.15
     property real rand: 0.10
-
     color: if(posiblePos[feldID]==0){
                 return "beige"
            }
@@ -20,6 +19,7 @@ Rectangle {
     x:0
     y:0
     Rectangle{
+        id:rect
         Text {
             anchors.left: parent.left
             anchors.top: parent.top
@@ -83,9 +83,16 @@ Rectangle {
             visible:Logic.checkStreetDown(player1.way,player2.way,einzelFeld.feldID)
         }
         Stone{
+            id:stone
             d:spielfeldLaenge*0.6
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+            //anchors.horizontalCenter: parent.horizontalCenter
+            //anchors.verticalCenter: parent.verticalCenter
+            property int preX: 100
+            property int preY: 10
+            x:(rect.width-width)/2
+            y:{
+                console.debug((rect.height-height)/2)
+                return (rect.height-height)/2}
             visible:if(playerPos[feldID]!==0){
                         return true
                     }
@@ -93,17 +100,36 @@ Rectangle {
                         return false
                     }
             player:playerPos[feldID]
-
+            states: State {
+                    name: "move"
+                    when: mouseArea.pressed&&posiblePos[feldID]!=0
+                    PropertyChanges { target: stone; x:preX
+                        y:preY }
+                }
+            transitions:[Transition {
+                    from: "move"; to: "*"
+                    NumberAnimation {
+                        properties: "x,y";
+                        //easing.type: Easing.InOutQuad;
+                        duration: 1000;
+                    }
+                }
+                ]
         }
+
     }
     MouseArea{
+        id:mouseArea
         anchors.fill:parent
         onClicked: {
             if(posiblePos[feldID]!=0){
+                var preId
                 Logic.platzieren(feldID)
+                preId=Logic.getPrePos()
+                //stone.preX=xFelderPos[preId]//+((rect.width-stone.width)/2)
+                stone.preY=yFelderPos[feldID]-yFelderPos[preId]+((rect.height-stone.height)/2)
+                console.debug(preId,stone.preY)
             }
         }
     }
-
-
 }
