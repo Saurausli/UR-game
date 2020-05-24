@@ -43,16 +43,16 @@ Rectangle {
                                 'notOnTheBoard' : startstones,
                                 'manuell':true,'score':0,
                                 'way':wegPlayer1,'serie':0,
-                                'last':100, 'first':0, 'burg':0, 'doppelZug':0,
-                                'gefahr':0,'fressen':0,
-                                'saveArea':0}
+                                'last':100, 'first':0, 'burg':50, 'doppelZug':25,
+                                'gefahr':100,'fressen':100,
+                                'saveArea':50}
     property variant player2: {'playerId':2, 'playerColor':'orange' ,
                                 'notOnTheBoard' : startstones,
                                 'manuell':true,'score':0,
                                 'way':wegPlayer2,'serie':0,
-                                'last':0, 'first':100, 'burg':0, 'doppelZug':0,
-                                'gefahr':0,'fressen':0,
-                                'saveArea':0}
+                                'last':100, 'first':0, 'burg':50, 'doppelZug':25,
+                                'gefahr':100,'fressen':100,
+                                'saveArea':50}
     property variant anDerReihe:player1
     property variant nichtAnDerReihe:player2
     TopBar{
@@ -61,9 +61,9 @@ Rectangle {
         anchors.top: ur.top
         width: spielBrettItem.width
         anchors.horizontalCenter: ur.horizontalCenter
-        enabled: !openDialog
+        //enabled: !openDialog
     }
-    Item{
+    Rectangle{
         id:spielBrettItem
         anchors.verticalCenter: ur.verticalCenter
         anchors.horizontalCenter: ur.horizontalCenter

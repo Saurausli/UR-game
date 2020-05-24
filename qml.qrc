@@ -19,13 +19,9 @@
         <file>Text.qml</file>
         <file>NewGameBildschirm.qml</file>
         <file>SpinBox.qml</file>
-
-        <file>Textur/GrasBackground.png</file>
-
         <file>Algorithmus.js</file>
         <file>ArrayHandler.js</file>
         <file>Autoplaymanager.qml</file>
         <file>Gewichtungen.qml</file>
-
     </qresource>
 </RCC>

@@ -14,13 +14,13 @@ Rectangle{
         id:wuerfelArea
     height:wuerfel.height
     width: wuerfel.width*0.6
-    Text {
-        x:wuerfel.height*0.1
-        y:wuerfel.height*0.1
-        text: individualWurf
-        font.pixelSize:wuerfel.height*0.3
-        font.bold: true
-    }
+        Text {
+            x:wuerfel.height*0.1
+            y:wuerfel.height*0.1
+            text: individualWurf
+            font.pixelSize:wuerfel.height*0.3
+            font.bold: true
+        }
         WuerfelEinzeln{
             id:wuerfel1
             x:wuerfelArea.width*0.3
@@ -29,13 +29,11 @@ Rectangle{
                 wurf=wuerfel1.value+wuerfel2.value+wuerfel3.value+wuerfel4.value
                 individualWurf=wurf
                 wurfBereit=false
-
-                //console.debug(anDerReihe.playerId+" wurf "+wurf)
                 ur.posiblePos=Logic.moeglicherZug()
                 if(wurf===0||Array.isEqual(posiblePos,Array.leeresArray(posiblePos.length))){
                     //console.debug("wurf ===0|| array leer "+posiblePos)
                     Logic.naechsterZug()
-                }
+               }
                 else if(!anDerReihe.manuell){
                         Logic.setSingelPlayerMove()
                     }
@@ -72,7 +70,6 @@ Rectangle{
         wuerfel2.wuerfeln()
         wuerfel3.wuerfeln()
         wuerfel4.wuerfeln()
-        posiblePos=Array.leeresArray(xFelder*yFelder)
     }
 
     NotOnTheBoard{

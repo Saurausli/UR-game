@@ -71,6 +71,7 @@ Rectangle  {
             width: parent.width*0.5
             height: parent.height*0.1
             onClicked: {
+                ur.pause=false
                Logic.newGame(multiPlayerLocal)
 
             }
@@ -81,6 +82,7 @@ Rectangle  {
             width: parent.width*0.5
             height: parent.height*0.1
             onClicked: {
+                ur.pause=false
                Logic.newGame(singelPlayer)
             }
         }
@@ -92,6 +94,7 @@ Rectangle  {
             onClicked: {
                 player1.serie=0
                 player2.serie=0
+                ur.pause=false
                Logic.newGame(autoPlayer)
             }
         }
@@ -101,12 +104,13 @@ Rectangle  {
             width: parent.width*0.5
             height: parent.height*0.1
             onClicked: {
+                ur.pause=false
                openDialog=false
             }
 
             visible: gameStarted&&!finishWinner
         }
-        Button {
+        /*Button {
             text: "Algorithmus gewichtung"
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width*0.5
@@ -115,7 +119,7 @@ Rectangle  {
                 openDialog=false
                autoPlayManager.visible=true
             }
-        }
+        }*/
         Button {
             text: "Quit"
             anchors.horizontalCenter: parent.horizontalCenter
