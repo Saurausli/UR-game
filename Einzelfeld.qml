@@ -7,7 +7,6 @@ Rectangle {
     property int feldID: 0
     property int strassenBreite: spielfeldLaenge*0.15
     property real rand: 0.10
-
     color: if(posiblePos[feldID]==0){
                 return "beige"
            }
@@ -19,11 +18,13 @@ Rectangle {
     width: spielfeldLaenge
     x:0
     y:0
-    Rectangle{
-
-        x: einzelFeld.spielfeldLaenge*rand
-        y: einzelFeld.spielfeldLaenge*rand
-
+    Image{
+        anchors.fill: parent
+        anchors.margins: einzelFeld.spielfeldLaenge*rand
+        fillMode: Image.Tile
+        sourceSize.width: 200
+        sourceSize.height: 200
+        source: "Textur/GrasBackground.png"
         height: spielfeldLaenge*(1-(rand*2))
         width: spielfeldLaenge*(1-(rand*2))
         visible: if(feldFunktion==keinFeld){
@@ -32,7 +33,7 @@ Rectangle {
                 else{
                      return true
                  }
-        color:  if(feldFunktion==normalFeld)
+        /*color:  if(feldFunktion==normalFeld)
                     return "darkgreen"
                 else if(feldFunktion==doppeltZiehen)
                    return "darkgoldenrod"
@@ -40,7 +41,7 @@ Rectangle {
                    return "darkgray"
                 else{
                    return "red"
-               }
+               }*/
         Rectangle{
             x:-parent.x
             y:(spielfeldLaenge/2)-(strassenBreite/2)-parent.y

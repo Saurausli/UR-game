@@ -20,5 +20,6 @@
         <file>Text.qml</file>
         <file>NewGameBildschirm.qml</file>
         <file>SpinBox.qml</file>
+        <file>Textur/GrasBackground.png</file>
     </qresource>
 </RCC>
