@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import "JSCode.js" as Logic
+import "../src/JSCode.js" as Logic
 Rectangle {
     id:spielFeld
     property variant spielfeldZustand: [8*3]

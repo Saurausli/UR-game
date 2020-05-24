@@ -1,7 +1,7 @@
 import QtQuick 2.0
-import "JSCode.js" as Logic
-import "Algorithmus.js" as Algorithmus
-import "ArrayHandler.js" as Array
+import "../src/JSCode.js" as Logic
+import "../src/Algorithmus.js" as Algorithmus
+import "../src/ArrayHandler.js" as Array
 Rectangle {
     id:ur
     width: feldLaenge*xFelder

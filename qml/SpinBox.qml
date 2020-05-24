@@ -29,6 +29,29 @@ Item {
         width:(spinBox.width-text.width)/4
         anchors.left: text.right
         height: spinBox.height
+
+        background: Rectangle{
+            anchors.fill: parent
+            radius:height*0.05
+            color: if(plus.pressed){
+                       return "olivedrab"
+                   }
+                   else{
+                       return "olive"
+                   }
+            Rectangle{
+                anchors.fill: parent
+                anchors.margins: plus.height*0.1
+                radius:plus.radius*0.95
+                color: if(plus.pressed){
+                           return "goldenrod"
+                       }
+                       else{
+                           return "darkgoldenrod"
+                     }
+
+            }
+        }
         onClicked: ++spinBox.value
     }
     TextField {
@@ -48,6 +71,28 @@ Item {
     Button{
         id:minus
         text: "-"
+        background: Rectangle{
+            anchors.fill: parent
+            radius:height*0.05
+            color: if(minus.pressed){
+                       return "olivedrab"
+                   }
+                   else{
+                       return "olive"
+                   }
+            Rectangle{
+                anchors.fill: parent
+                anchors.margins: minus.height*0.1
+                radius:minus.radius*0.95
+                color: if(minus.pressed){
+                           return "goldenrod"
+                       }
+                       else{
+                           return "darkgoldenrod"
+                     }
+
+            }
+        }
         anchors.left: input.right
         anchors.right: spinBox.right
         height: spinBox.height

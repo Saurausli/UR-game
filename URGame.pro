@@ -29,4 +29,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target qml
 
 DISTFILES += \
-    Player.qml
+    qml/Button.qml

@@ -1,6 +1,6 @@
 import QtQuick 2.0
-import "JSCode.js" as Logic
-import "ArrayHandler.js" as Array
+import "../src/JSCode.js" as Logic
+import "../src/ArrayHandler.js" as Array
 Rectangle{
     id:wuerfel
     property int stones: 0

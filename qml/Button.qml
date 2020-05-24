@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.13
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.3
+
 MouseArea {
     id:button
     width: 100
@@ -25,7 +26,7 @@ MouseArea {
                    return button.borderPressedColor
                }
                else{
-                   return button.borderPressedColor
+                   return button.borderColor
                }
         Rectangle{
             anchors.fill: parent

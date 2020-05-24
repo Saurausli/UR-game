@@ -1,8 +1,7 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.13
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.3
-import "JSCode.js" as Logic
+import "../src/JSCode.js" as Logic
 Rectangle  {
     id: winner
     width: parent.width*0.8
