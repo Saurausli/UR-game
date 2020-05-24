@@ -29,7 +29,7 @@ Item {
     property variant turnAngle:{
             return Math.floor((Math.random() * 360) +1)
         }
-    property bool finished: false
+    signal finished()
     transform:
         Rotation {
         origin.x: d;
@@ -116,16 +116,18 @@ Item {
             id:animation
             from: 0;
             to: Math.floor((Math.random() * 360) +1)*20;
-            duration: 1000
+            duration: if(gameMode===autoPlayer)return 1
+                      else return 500
+
             running: false
             onFinished: {
-                    einzelWuerfel.finished=true
+                    einzelWuerfel.finished()
             }
         }
+
     property int value: 0
     function wuerfeln(){
         var arr=[]
-        finished=false
         animation.running=true
         turnAngle=Math.floor((Math.random() * 360)+turnAngle)
             if(Math.floor((Math.random() * 2))+1==1){

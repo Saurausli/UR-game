@@ -11,13 +11,14 @@ Rectangle {
                 return "beige"
            }
              else{
-               console.debug(posiblePos+" posibel")
+               //console.debug(posiblePos+" posibel")
                 return "lime"
             }
     height: spielfeldLaenge
     width: spielfeldLaenge
     x:0
     y:0
+
     Image{
         anchors.fill: parent
         anchors.margins: einzelFeld.spielfeldLaenge*rand
@@ -25,6 +26,7 @@ Rectangle {
         sourceSize.width: 200
         sourceSize.height: 200
         source: "Textur/GrasBackground.png"
+
         height: spielfeldLaenge*(1-(rand*2))
         width: spielfeldLaenge*(1-(rand*2))
         visible: if(feldFunktion==keinFeld){
