@@ -29,7 +29,7 @@ MouseArea {
                }
         Rectangle{
             anchors.fill: parent
-            anchors.margins: button.width*0.05
+            anchors.margins: button.height*0.1
             radius:button.radius*0.95
             color: if(button.pressed){
                        return button.pressedColor

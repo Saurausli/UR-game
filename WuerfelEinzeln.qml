@@ -1,7 +1,8 @@
-import QtQuick 2.0
+import QtQuick 2.13
 import QtQuick.Shapes 1.10
 
 Item {
+    id:einzelWuerfel
     property int d: feldLaenge*0.3
     property variant edge: {
         var arr=[]
@@ -23,9 +24,12 @@ Item {
         }
         return arr
     }
+    width: d*2
+    height: d*2
     property variant turnAngle:{
             return Math.floor((Math.random() * 360) +1)
         }
+    signal finished()
     transform:
         Rotation {
         origin.x: d;
@@ -34,8 +38,8 @@ Item {
         angle: turnAngle
         }
     Shape{
-        width:d*2
-        height: d*2
+        id:triangle
+        anchors.fill: parent
         ShapePath {
             strokeColor: "darkslategrey"
             fillColor: "darkslategrey"
@@ -60,6 +64,7 @@ Item {
             PathLine { x: d; y: 0}
             PathLine { x: d; y: d }
         }
+
     }
 
     Rectangle{
@@ -106,9 +111,24 @@ Item {
         border.width: d/40
         border.color: "black"
     }
+    transformOrigin: Item.Center
+    RotationAnimator on rotation {
+            id:animation
+            from: 0;
+            to: Math.floor((Math.random() * 360) +1)*20;
+            duration: if(gameMode===autoPlayer)return 1
+                      else return 500
 
+            running: false
+            onFinished: {
+                    einzelWuerfel.finished()
+            }
+        }
+
+    property int value: 0
     function wuerfeln(){
         var arr=[]
+        animation.running=true
         turnAngle=Math.floor((Math.random() * 360)+turnAngle)
             if(Math.floor((Math.random() * 2))+1==1){
                 arr[0]=true
@@ -117,7 +137,7 @@ Item {
                 arr[3]=false
                 arr[Math.floor((Math.random() * 3))+1]=true
                 edge=arr
-                return 1
+                value= 1
             }
             else{
                 arr[0]=false
@@ -126,7 +146,7 @@ Item {
                 arr[3]=true
                 arr[Math.floor((Math.random() * 3))+1]=false
                 edge=arr
-                return 0
+                value= 0
             }
     }
 }

@@ -6,4 +6,5 @@ Item {
     property int playerId: 1
     property string playerColor: "white"
     property variant way: []
+    property bool manuell: true
 }

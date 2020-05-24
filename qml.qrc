@@ -7,7 +7,6 @@
         <file>URSpiel.qml</file>
         <file>Wuerfel.qml</file>
         <file>WuerfelEinzeln.qml</file>
-        <file>Player.qml</file>
         <file>Stone.qml</file>
         <file>NotOnTheBoard.qml</file>
         <file>WinnerDialog.qml</file>
@@ -20,5 +19,9 @@
         <file>Text.qml</file>
         <file>NewGameBildschirm.qml</file>
         <file>SpinBox.qml</file>
+        <file>Algorithmus.js</file>
+        <file>ArrayHandler.js</file>
+        <file>Autoplaymanager.qml</file>
+        <file>Gewichtungen.qml</file>
     </qresource>
 </RCC>
